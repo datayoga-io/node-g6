@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "strict": false,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "types": ["node"],
+    "lib": ["esnext", "scripthost", "DOM"],
+    "outDir": "dist"
+  },
+  "include": ["**/*.ts"]
+}

@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "id": "pipeline:a"
+    },
+    {
+      "id": "store:hello"
+    },
+    {
+      "id": "store:world"
+    },
+    {
+      "id": "store:d"
+    },
+    {
+      "id": "store:e"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline:a",
+      "target": "store:hello"
+    },
+    {
+      "source": "pipeline:a",
+      "target": "store:world"
+    },
+    {
+      "source": "pipeline:a",
+      "target": "store:d"
+    },
+    {
+      "source": "pipeline:a",
+      "target": "store:e"
+    }
+  ]
+}

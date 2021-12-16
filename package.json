@@ -1,0 +1,49 @@
+{
+  "name": "@datayoga-io/node-g6",
+  "version": "1.0.0",
+  "description": "server side rendering of g6 based graph flowcharts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "mkdir -p dist/ && touch dist/index.js",
+    "build": "tsc && chmod +x dist/cli.js"
+  },
+  "bin": {
+    "node-g6": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datayoga-io/node-g6.git"
+  },
+  "keywords": [
+    "g6",
+    "graphviz",
+    "graph",
+    "dagre",
+    "dag",
+    "visualization",
+    "node"
+  ],
+  "author": "Oren Elias",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datayoga-io/node-g6/issues"
+  },
+  "homepage": "https://github.com/datayoga-io/node-g6#readme",
+  "dependencies": {
+    "@antv/g6": "^4.5.1",
+    "@types/yargs": "^17.0.7",
+    "canvas": "^2.8.0",
+    "fs": "^0.0.1-security",
+    "jsdom": "^19.0.0",
+    "jsdom-global": "^3.0.2",
+    "node-canvas": "^2.7.0",
+    "yargs": "^17.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.0"
+  }
+}
