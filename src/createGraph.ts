@@ -39,21 +39,16 @@ const iconWidth = iconHeight;
 function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
   const defaultNodeStyle: INodeStyleOptions = {
     fill: "#C6E5FF",
+    stroke: "#5B8FF9",
+    fontSize: 12,
+    fontColor: "black",
   };
   G6.registerNode(
     "node",
     {
       drawShape(cfg, group) {
-        const nodeStyle = options[(cfg.id as string).split(".")[0]];
-        // options[(cfg.id as string).split(".")[0]]
         const type = (cfg.id as string).split(":")[0];
-        let fill = (nodeStyle && nodeStyle.fill) || defaultNodeStyle.fill;
-
-        if (type == "pipeline") {
-          fill = "lightgreen";
-        } else if (type == "table") {
-          fill = "lightgrey";
-        }
+        const nodeStyle = Object.assign(defaultNodeStyle, options[type]);
 
         const rect = group.addShape("rect", {
           attrs: {
@@ -62,34 +57,12 @@ function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
             width: nodeWidth,
             height: nodeHeight,
             radius: 10,
-            stroke: "#5B8FF9",
-            fill: fill,
+            stroke: nodeStyle.stroke,
+            fill: nodeStyle.fill,
             lineWidth: 3,
           },
           name: "rect-shape",
         });
-        // const keyShape = group.addShape("image", {
-        //   attrs: {
-        //     x: (-1 * nodeWidth) / 2,
-        //     y: -1 * nodeHeight,
-        //     width: iconWidth,
-        //     height: iconHeight,
-        //     img:
-        //       "file://" +
-        //       path.join(__dirname, "icons/outline_settings_black_48dp.png"),
-
-        //     // "http://g.alicdn.com/cm-design/arms-trace/1.0.155/styles/armsTrace/images/TAIR.png",
-
-        //     // fontFamily: "Material Icons",
-        //     // textAlign: "center",
-        //     // textBaseline: "middle",
-        //     // text: "face3",
-        //     // fill: "#00287E",
-        //     // fontSize: 11,
-        //   },
-        //   // must be assigned in G6 3.3 and later versions. it can be any value you want
-        //   name: `node-icon`,
-        // });
 
         if (cfg.id) {
           group.addShape("text", {
@@ -97,8 +70,8 @@ function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
               text: formatLabel(<string>cfg.id),
               x: 0,
               y: 0,
-              fill: "black",
-              fontSize: 12,
+              fill: nodeStyle.fontColor,
+              fontSize: nodeStyle.fontSize,
               textAlign: "center",
               textBaseline: "middle",
             },

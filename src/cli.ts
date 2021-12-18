@@ -20,6 +20,9 @@ yargs
     describe: "data file in json format",
     type: "string",
   })
+  .option("options", {
+    description: "options file in json format",
+  })
   .option("out", {
     description: "output file",
     default: "pipeline.png",
