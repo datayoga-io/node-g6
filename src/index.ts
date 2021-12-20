@@ -2,6 +2,13 @@ import { Graph } from "@antv/g6";
 import { createGraph } from "./createGraph";
 import { IRenderOptions, IStyleOptions } from "./interfaces";
 
+/**
+ * render the graph in data to a binary buffer
+ * @param {object} object data
+ * @param {IRenderOptions}  IRenderOptions options to use for rendering
+ * @return {Promise<string>} Promise<string> string containing image buffer
+ */
+export { IRenderOptions, IStyleOptions };
 export async function render(data, options: IRenderOptions): Promise<string> {
   //
   // create virtual dom
