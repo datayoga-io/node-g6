@@ -1,6 +1,7 @@
-import G6 from "@antv/g6";
+import G6, { G6Event } from "@antv/g6";
 import path from "path";
-import { INodeStyleOptions, IStyleOptions } from "./interfaces";
+import { IRenderOptions } from "src";
+import { INodeStyleOptions } from "./interfaces";
 /**
  * fit a string to a given length and add elipsis
  * @param {string} str label
@@ -36,20 +37,21 @@ const nodeWidth = 150;
 const nodeHeight = 30;
 const iconHeight = 12;
 const iconWidth = iconHeight;
+const defaultNodeStyle: INodeStyleOptions = {
+  fill: "#C6E5FF",
+  stroke: "#5B8FF9",
+  fontSize: 12,
+  fontColor: "black",
+  lineWidth: 1,
+};
+
 function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
-  const defaultNodeStyle: INodeStyleOptions = {
-    fill: "#C6E5FF",
-    stroke: "#5B8FF9",
-    fontSize: 12,
-    fontColor: "black",
-  };
   G6.registerNode(
     "node",
     {
       drawShape(cfg, group) {
         const type = (cfg.id as string).split(":")[0];
-        const nodeStyle = Object.assign(defaultNodeStyle, options[type]);
-
+        const nodeStyle = Object.assign({}, defaultNodeStyle, options[type]);
         const rect = group.addShape("rect", {
           attrs: {
             x: (-1 * nodeWidth) / 2 - iconWidth / 2,
@@ -84,15 +86,32 @@ function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
     "single-node"
   );
 }
-function createGraph(options: IStyleOptions) {
+function createGraph(options: IRenderOptions, nodeTypes: string[]) {
+  const nodeStyles = nodeTypes.map((type) => {
+    return {
+      id: type,
+      label: type,
+      type: "rect",
+      style: Object.assign({}, defaultNodeStyle, options.nodes[type]),
+    };
+  });
+  const legend = new G6.Legend({
+    data: {
+      nodes: nodeStyles,
+    },
+    containerStyle: {
+      fill: "white",
+      lineWidth: 0,
+    },
+  });
   configNodeTypes((options && options.nodes) || {});
   const graph = new G6.Graph({
     container: "container",
-    width: (options && options.width) || 2000,
-    height: (options && options.height) || 2000,
+    width: 2000,
+    height: 2000,
     layout: {
       type: "dagre",
-      ranksep: 20,
+      ranksep: 15,
       nodesep: nodeWidth / 2,
       rankDir: "LR",
       controlPoints: true,
@@ -110,10 +129,14 @@ function createGraph(options: IStyleOptions) {
         stroke: "#C2C8D5",
       },
     },
+    plugins: [legend],
     fitView: false,
   });
 
-  return graph;
+  return {
+    graph,
+    legend,
+  };
 }
 
 export { createGraph };

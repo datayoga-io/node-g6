@@ -4,34 +4,34 @@
       "id": "pipeline:a"
     },
     {
-      "id": "store:hello"
+      "id": "datastore:hello"
     },
     {
-      "id": "store:world"
+      "id": "datastore:world"
     },
     {
-      "id": "store:d"
+      "id": "file:source_file"
     },
     {
-      "id": "store:e"
+      "id": "datastore:e"
     }
   ],
   "edges": [
     {
       "source": "pipeline:a",
-      "target": "store:hello"
+      "target": "datastore:hello"
     },
     {
       "source": "pipeline:a",
-      "target": "store:world"
+      "target": "datastore:world"
+    },
+    {
+      "source": "file:source_file",
+      "target": "pipeline:a"
     },
     {
       "source": "pipeline:a",
-      "target": "store:d"
-    },
-    {
-      "source": "pipeline:a",
-      "target": "store:e"
+      "target": "datastore:e"
     }
   ]
 }

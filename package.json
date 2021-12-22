@@ -35,7 +35,6 @@
   "homepage": "https://github.com/datayoga-io/node-g6#readme",
   "dependencies": {
     "@antv/g6": "^4.5.1",
-    "@types/yargs": "^17.0.7",
     "canvas": "^2.8.0",
     "fs": "^0.0.1-security",
     "jsdom": "^19.0.0",
@@ -44,6 +43,7 @@
     "yargs": "^17.3.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.0"
+    "@types/node": "^17.0.0",
+    "@types/yargs": "^17.0.7"
   }
 }
