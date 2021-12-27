@@ -1,7 +1,7 @@
-import G6, { G6Event } from "@antv/g6";
-import path from "path";
+import G6 from "@antv/g6";
 import { IRenderOptions } from "src";
 import { INodeStyleOptions } from "./interfaces";
+
 /**
  * fit a string to a given length and add elipsis
  * @param {string} str label
@@ -21,6 +21,7 @@ const fittingString = (str, maxWidth, fontSize) => {
   }
   return str;
 };
+
 const formatLabel = (id: string) => {
   const type = id.split(":")[0];
   let object = id.split(":")[1];
@@ -83,9 +84,10 @@ function configNodeTypes(options: { [type: string]: INodeStyleOptions }) {
         return rect;
       },
     },
-    "single-node"
+    "rect"
   );
 }
+
 function createGraph(options: IRenderOptions, nodeTypes: string[]) {
   const nodeStyles = nodeTypes.map((type) => {
     return {
@@ -111,19 +113,20 @@ function createGraph(options: IRenderOptions, nodeTypes: string[]) {
     height: 2000,
     layout: {
       type: "dagre",
-      ranksep: 15,
-      nodesep: nodeWidth / 2,
+      ranksep: 0,
+      nodesep: nodeHeight,
       rankDir: "LR",
       controlPoints: true,
     },
     defaultNode: {
       type: "node",
+      size: [nodeWidth, nodeHeight],
     },
     defaultEdge: {
       type: "polyline",
       style: {
         radius: 20,
-        offset: 45,
+        offset: 35,
         endArrow: true,
         lineWidth: 2,
         stroke: "#C2C8D5",
