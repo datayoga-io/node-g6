@@ -19,7 +19,6 @@ jobs:
         run: |
           npm install
       - name: build, test
-        working-directory: ./packages
         run: |
           npm version patch
           npm run build
