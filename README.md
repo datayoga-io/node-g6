@@ -8,6 +8,53 @@ This package allows to render flow charts and DAGs using server side rendering u
 npm install @datayoga-io/node-g6
 ```
 
+# Example
+
+Given this input json:
+
+```
+{
+  "nodes": [
+    {
+      "id": "pipeline:a"
+    },
+    {
+      "id": "datastore:hello"
+    },
+    {
+      "id": "datastore:world"
+    },
+    {
+      "id": "file:source_file"
+    },
+    {
+      "id": "datastore:e"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline:a",
+      "target": "datastore:hello"
+    },
+    {
+      "source": "pipeline:a",
+      "target": "datastore:world"
+    },
+    {
+      "source": "file:source_file",
+      "target": "pipeline:a"
+    },
+    {
+      "source": "pipeline:a",
+      "target": "datastore:e"
+    }
+  ]
+}
+```
+
+Generates the following image:
+![DataYoga pipeline graph](pipeline.png)
+
 # Using from command line
 
 ```
