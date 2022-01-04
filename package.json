@@ -1,6 +1,6 @@
 {
   "name": "@datayoga-io/node-g6",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "server side rendering of g6 based graph flowcharts",
   "main": "./dist/index.js",
   "scripts": {
