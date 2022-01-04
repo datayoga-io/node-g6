@@ -39,7 +39,6 @@
     "fs": "^0.0.1-security",
     "jsdom": "^19.0.0",
     "jsdom-global": "^3.0.2",
-    "node-canvas": "^2.7.0",
     "yargs": "^17.3.0"
   },
   "devDependencies": {
