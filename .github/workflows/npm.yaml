@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
-          registry-url: "https://npm.pkg.github.com"
+          registry-url: "https://registry.npmjs.org"
           # Defaults to the user or organization that owns the workflow file
           scope: "@datayoga-io"
       - name: update versions in repo
@@ -26,8 +26,6 @@ jobs:
         run: |
           npm version patch
           npm run build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: push version to repo
         run: |
           git push
@@ -35,11 +33,7 @@ jobs:
         run: |
           npm publish --access=public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
   validate-install:
     needs: [build]
     runs-on: ubuntu-latest
